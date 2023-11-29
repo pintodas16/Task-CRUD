@@ -4,7 +4,7 @@
 
 ## Usage
 
-Rename "config.env.env" to ".env" and update the values/settings to your own
+Rename "config.env.env" to ".env" and update the values/settings using your credentials
 
 ## Install Dependencies
 
@@ -123,7 +123,7 @@ POST /api/tasks
 ### Update a Task
 
 ```http
-PATCH /api/tasks/:id
+PUT /api/tasks/:id
 ```
 
 #### Demo Response

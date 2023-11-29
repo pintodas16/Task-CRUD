@@ -13,7 +13,7 @@ const getTasks = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(404);
-    throw new Error("Resource not found ");
+    throw new Error("task not found ");
   }
 });
 //@dest     fetch single task with id
@@ -25,7 +25,7 @@ const getTaskById = asyncHandler(async (req, res) => {
     res.json(task);
   } else {
     res.status(404);
-    throw new Error("Resource not found ");
+    throw new Error("Task not found ");
   }
 });
 
@@ -70,10 +70,10 @@ const deleteTask = asyncHandler(async (req, res) => {
 
   if (task) {
     await Task.deleteOne({ _id: task._id });
-    res.json({ message: "Product removed" });
+    res.json({ message: "task removed" });
   } else {
     res.status(404);
-    throw new Error("Product not found");
+    throw new Error(`No task found with the id of ${req.params.id}`);
   }
 });
 
@@ -84,7 +84,7 @@ const updateTask = asyncHandler(async (req, res) => {
   let task = await Task.findById(req.params.id);
   if (!task) {
     res.status(404);
-    throw new Error(`No course with the id of ${req.params.id}`);
+    throw new Error(`No task found with the id of ${req.params.id}`);
   }
   console.log(req.body);
   task = await Task.findByIdAndUpdate(req.params.id, req.body, {
