@@ -114,9 +114,9 @@ POST /api/tasks
 
 ```json
 {
-  "title": "Demo Task",
-  "description": "This is a demo task",
-  "due_date": "12-01-2023",
+  "title": "Task featured completed. ",
+  "description": "This is a demo description .....",
+  "due_date": "11/29/2023",
   "status": "Pending"
 }
 ```
