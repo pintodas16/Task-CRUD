@@ -30,7 +30,7 @@ To seed the database with Tasks data from the "/data" folder, run
 npm run data:destroy -d
 
 # Import all data
-npm run data:import -d
+npm run data:import -i
 ```
 
 # Task Schema
@@ -116,7 +116,8 @@ POST /api/tasks
 {
   "title": "Demo Task",
   "description": "This is a demo task",
-  "due_date": "12-01-2023"
+  "due_date": "12-01-2023",
+  "status": "Pending"
 }
 ```
 
