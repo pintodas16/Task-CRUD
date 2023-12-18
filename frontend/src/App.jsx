@@ -12,7 +12,12 @@ function App() {
   });
   const addTask = (task) => {};
   const updateTask = (id, task) => {};
-  const deleteTask = (id) => {};
+  const deleteTask = (id) => {
+    axios.delete(`/tasks/${id}`);
+    let deletedTasks = [...tasks].filter((task) => task._id !== id);
+    console.log(deletedTasks);
+    setTasks(deletedTasks);
+  };
 
   const getTasks = async () => {
     try {

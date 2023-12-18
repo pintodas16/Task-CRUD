@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
+import { useTaskContext } from "../../contexts/taskContext";
 function Task({ task }) {
+  const { deleteTask } = useTaskContext();
+  const handleDelete = (id) => {
+    deleteTask(id);
+  };
   return (
     <div className="border shadow-lg px-6 py-4 rounded-xl bg-white   transition-all duration-300 hover:border-gray-400 hover:shadow-xl ">
       {/* <!-- edit and delete  --> */}
@@ -9,7 +14,11 @@ function Task({ task }) {
             <i className="fa-regular fa-pen-to-square"></i>
           </span>
         </Link>
-        <span className="px-3 py-1 border rounded-md hover:bg-red-500">
+        {/* delete button  */}
+        <span
+          className="px-3 py-1 border rounded-md hover:bg-red-500"
+          onClick={() => handleDelete(task._id)}
+        >
           <i className="fa-solid fa-trash-can"></i>
         </span>
       </div>

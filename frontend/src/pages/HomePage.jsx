@@ -15,7 +15,7 @@ function HomePage() {
     console.log(loading, isError);
     content = <h5>{message}</h5>;
   }
-  if (!loading && !isError && tasks?.length < 0) {
+  if (!loading && !isError && tasks?.length <= 0) {
     content = <h5> there is no task </h5>;
   }
   if (!loading && !isError && tasks?.length > 0) {
