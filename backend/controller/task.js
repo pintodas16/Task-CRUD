@@ -37,11 +37,12 @@ const createTask = asyncHandler(async (req, res) => {
   const { title, description, status, due_date } = req.body;
   console.log(title, description, status, due_date);
   const taskExist = await Task.findOne({ title });
+  // console.log(taskExist);
   if (taskExist) {
     res.status(400);
     throw new Error("Task already exist");
   }
-
+  // console.log("hello");
   // create task
   const task = await Task.create({
     title,
@@ -49,6 +50,7 @@ const createTask = asyncHandler(async (req, res) => {
     due_date,
     status,
   });
+  // console.log(task);
 
   if (task) {
     res.status(201).json({

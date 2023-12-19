@@ -3,7 +3,8 @@ import { createContext, useContext } from "react";
 export const TaskContext = createContext({
   tasks: [],
   loading: true,
-  error: "",
+  error: {},
+  data: {},
   addTask: (task) => {},
   updateTask: (id, task) => {},
   deleteTask: (id) => {},

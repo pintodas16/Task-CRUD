@@ -1,24 +1,28 @@
+import Loading from "../components/Loading.jsx";
+import Error from "../components/error.jsx";
 import Tasks from "../components/tasks/Tasks.jsx";
-import { useTaskContext } from "../contexts/taskContext.js";
+import useTaskContext from "../contexts/useTaskHook.js";
+
 function HomePage() {
-  const { loading, error, tasks } = useTaskContext();
-  const { isError, message } = error;
-  // console.log(isError, message);
-  // console.log(loading, error, tasks);
+  const { isLoading, tasks, isError, error } = useTaskContext();
   // let decide what content to show
+  // console.log(isLoading, tasks, error, isError);
+  // const isLoading = true;
+  // const error = "";
+  // const tasks = [];
   let content;
-  if (loading && !isError) {
+  if (isLoading && !isError) {
     // console.log(loading, isError);
-    content = <h5>Loading.....</h5>;
+    content = <Loading />;
   }
-  if (!loading && isError) {
-    console.log(loading, isError);
-    content = <h5>{message}</h5>;
+  if (!isLoading && isError) {
+    // console.log(isLoading, error);
+    content = <Error error={error} />;
   }
-  if (!loading && !isError && tasks?.length <= 0) {
+  if (!isLoading && !isError && tasks?.length <= 0) {
     content = <h5> there is no task </h5>;
   }
-  if (!loading && !isError && tasks?.length > 0) {
+  if (!isLoading && !isError && tasks?.length > 0) {
     content = <Tasks />;
   }
   return <>{content}</>;

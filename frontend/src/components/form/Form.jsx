@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import React from "react";
-function Form({ children }) {
+// import React from "react";
+function Form({ onSubmit, children }) {
   return (
-    <form action="" className="flex flex-col gap-2 p-4">
+    <form onSubmit={onSubmit} className="flex flex-col gap-2 p-4">
       {children}
     </form>
   );

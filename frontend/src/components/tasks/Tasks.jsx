@@ -1,11 +1,8 @@
-import { useTaskContext } from "../../contexts/taskContext.js";
+import useTaskContext from "../../contexts/useTaskHook.js";
 import Task from "./Task.jsx";
 
 function Tasks() {
   const { tasks } = useTaskContext();
-  // console.log(tasks[0]);
-
-  // let decide what content to show
 
   return (
     <main>

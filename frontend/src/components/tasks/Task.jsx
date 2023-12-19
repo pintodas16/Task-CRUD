@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useTaskContext } from "../../contexts/taskContext";
+import useTaskContext from "../../contexts/useTaskHook";
 function Task({ task }) {
   const { deleteTask } = useTaskContext();
   const handleDelete = (id) => {
@@ -32,11 +32,11 @@ function Task({ task }) {
       <div className=" flex justify-end  gap-2 mt-6">
         <span
           className={`${
-            task.status === "pending"
-              ? "bg-red-500"
-              : task.status === "Done"
+            task.status === "In-Progress"
+              ? "bg-yellow-400"
+              : task.status === "Completed"
               ? "bg-green-500"
-              : "bg-yellow-400"
+              : "bg-red-500"
           } px-2 py-1 text-md rounded-md font-semibold`}
         >
           {task.status}

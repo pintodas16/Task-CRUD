@@ -1,22 +1,21 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import useTaskHook from "../../contexts/useTaskHook.js";
+import { redirect } from "react-router-dom";
+import { useTaskContext } from "../../contexts/taskContext.js";
 import Form from "./Form.jsx";
 import Input from "./Input.jsx";
+
 const options = [
   { value: "select-one", label: "Select One" },
   { value: "In-Progress", label: "In-Progress" },
   { value: "Completed", label: "Completed" },
 ];
 function FormContainer() {
-  const { createTask, isError, isLoading, error } = useTaskHook();
-  const navigate = useNavigate();
   // const [title, setTitle] = useState("");
   // const [description, setDescription] = useState("");
   // const [status, setStatus] = useState({});
   // const [date, setDate] = useState("");
   // const [error, setError] = useState(false);
-
+  const { addTask, data } = useTaskContext();
   // console.log(error);
   const [formData, setFormData] = useState({
     title: "",
@@ -71,22 +70,19 @@ function FormContainer() {
     if (validateForm()) {
       // form is valid
       // check if there is already task exis or not
-      const task = {
+      await addTask({
         ...formData,
         due_date: formData.date,
-      };
-      createTask(task);
-      if (!isLoading && !isError) {
-        console.log(isError, isLoading, error);
+      });
+      console.log(data);
+      if (data._success) {
         setFormData({
           title: "",
           description: "",
           status: "",
           date: "",
         });
-        navigate("/");
-      } else {
-        console.log("task already exist");
+        redirect("/");
       }
     } else {
       // form is invalid
