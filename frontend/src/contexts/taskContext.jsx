@@ -1,4 +1,5 @@
-import { createContext, useEffect, useReducer } from "react";
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useContext, useEffect, useReducer } from "react";
 import axios from "../utils/axios.js";
 
 const initialState = {
@@ -7,6 +8,7 @@ const initialState = {
   isError: false,
   error: "",
   isEditing: false,
+  task: {},
 };
 const reducer = (state, action) => {
   switch (action.type) {
@@ -23,6 +25,8 @@ const reducer = (state, action) => {
         tasks: action.payload,
         isLoading: false,
         isError: false,
+        // isEditing: false,
+        // task: {},
       };
     }
     case "task/created": {
@@ -50,6 +54,13 @@ const reducer = (state, action) => {
         isError: false,
       };
     }
+    case "task/isEdit":
+      console.log(action.payload);
+      return {
+        ...state,
+        isEditing: true,
+        task: action.payload,
+      };
     case "task/rejected":
       return {
         ...state,
@@ -64,7 +75,7 @@ const reducer = (state, action) => {
 
 const TaskContext = createContext();
 function TaskContextProvider({ children }) {
-  const [{ isLoading, isError, error, tasks }, dispatch] = useReducer(
+  const [{ isLoading, isError, error, tasks, isEditng }, dispatch] = useReducer(
     reducer,
     initialState
   );
@@ -75,7 +86,9 @@ function TaskContextProvider({ children }) {
       // dispatch("task/getTasks", response.data.data);
       dispatch({ type: "task/getTasks", payload: response.data.data });
     } catch (error) {
-      dispatch({ type: "task/rejected" });
+      // console.log(error.message);
+      // console.log(error.response);
+      dispatch({ type: "task/rejected", payload: error.message });
     }
   };
   const createTask = async (task) => {
@@ -84,6 +97,7 @@ function TaskContextProvider({ children }) {
       const response = await axios.post("/tasks", JSON.stringify(task));
       dispatch({ type: "task/created", payload: response.data.data });
     } catch (error) {
+      console.log("error block");
       // console.log(error.response.data.message);
       dispatch({ type: "task/rejected", payload: error.response.data.message });
     }
@@ -97,6 +111,10 @@ function TaskContextProvider({ children }) {
       dispatch({ type: "task/rejected", payload: error.response.data.message });
     }
   };
+  const isTaskEdit = (data) => {
+    // console.log(data);
+    dispatch({ type: "task/isEdit", payload: data });
+  };
 
   useEffect(() => {
     getTasks();
@@ -104,11 +122,24 @@ function TaskContextProvider({ children }) {
 
   return (
     <TaskContext.Provider
-      value={{ isLoading, isError, error, tasks, createTask, deleteTask }}
+      value={{
+        isLoading,
+        isError,
+        error,
+        tasks,
+        getTasks,
+        createTask,
+        deleteTask,
+        isTaskEdit,
+      }}
     >
       {children}
     </TaskContext.Provider>
   );
 }
 
-export { TaskContext, TaskContextProvider };
+function useTaskContext() {
+  return useContext(TaskContext);
+}
+
+export { TaskContext, TaskContextProvider, useTaskContext };

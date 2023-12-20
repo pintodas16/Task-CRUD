@@ -1,4 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
+import FilterContainer from "../filter/FilterContainer.jsx";
+import SearchBox from "./SearchBox.jsx";
 function Navbar() {
   const { pathname } = useLocation();
 
@@ -16,19 +18,7 @@ function Navbar() {
         </NavLink>
 
         {/* <!-- secarchbar --> */}
-        <div className=" ">
-          <form action="">
-            <div className="hidden md:block relative">
-              <span className="w-4 h-4 absolute left-2 top-2 text-center text-xl">
-                <i className="fa-solid fa-magnifying-glass text-xl text-red-300"></i>
-              </span>
-              <input
-                type="text"
-                className="pl-8 py-2 px-4 text-lg font-semibold leading-3 border-2 rounded-md border-rose-300 focus:outline-none focus:border-red-300 "
-              />
-            </div>
-          </form>
-        </div>
+        <SearchBox />
         {/* <!-- add task  --> */}
         <NavLink
           to="/create-task"
@@ -37,6 +27,7 @@ function Navbar() {
           Create Task
         </NavLink>
       </nav>
+      <FilterContainer />
     </header>
   );
 }

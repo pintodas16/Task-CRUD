@@ -1,15 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useTaskContext } from "../../contexts/taskContext.jsx";
 import Form from "./Form.jsx";
 import Input from "./Input.jsx";
-const options = [
-  { value: "select-one", label: "Select One" },
-  { value: "In-Progress", label: "In-Progress" },
-  { value: "Completed", label: "Completed" },
-];
+
 function FormContainer() {
-  const { createTask, isError, isLoading, error } = useTaskContext();
   const navigate = useNavigate();
   // const [title, setTitle] = useState("");
   // const [description, setDescription] = useState("");
@@ -143,7 +137,7 @@ function FormContainer() {
           type="submit"
           className="px-6 py-2 text-center font-semibold border-2 bg-red-300 border-red-300 hover:bg-white hover:text-red-400 hover:border-red-400 rounded-lg"
         >
-          Create task
+          Update task
         </button>
       </div>
     </Form>
