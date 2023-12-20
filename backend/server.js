@@ -5,7 +5,7 @@ import connectDB from "./config/db.js";
 import { errorHandler, notFound } from "./middleware/errorHandler.js";
 import taskRouter from "./routes/tasks.js";
 dotenv.config();
-const port = process.env.PORT;
+const port = process.env.PORT || 8000;
 
 connectDB(); //connect the mongodb
 
