@@ -5,7 +5,7 @@ const taskSchema = new mongoose.Schema(
       type: String,
       required: [true, "must provide name"],
       trim: true,
-      maxLength: [20, "name can not be more than 20 characters"],
+      maxLength: [40, "name can not be more than 40 characters"],
     },
     description: {
       type: String,
@@ -15,8 +15,8 @@ const taskSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["Pending", "In-Progress", "Completed"],
-      default: "Pending",
+      enum: ["Created", "Pending", "In-Progress", "Completed"],
+      default: "Created",
     },
     due_date: {
       type: String,
