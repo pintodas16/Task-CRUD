@@ -20,6 +20,7 @@ app.get("/api", (req, res) => {
 });
 
 app.use("/api/tasks", taskRouter);
-app.use(errorHandler);
 app.use(notFound);
+app.use(errorHandler);
+
 app.listen(port, () => console.log(`server is running ${port}`));
